@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pisscou PS4 Library</title>
+
+<style>
+body {
+    margin: 0;
+    background: #080808;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.library {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game {
+    padding: 18px;
+    margin: 8px 0;
+    background: #151515;
+    border: 2px solid #333;
+    border-radius: 8px;
+    font-size: 22px;
+}
+
+.game.selected {
+    background: #333;
+    border-color: white;
+}
+
+#status {
+    text-align: center;
+    margin-top: 25px;
+    color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="library">
+
+<h1>PISSCOU PS4 GAME LIBRARY</h1>
+
+<div id="games">
+
+<div class="game selected">GTA V</div>
+<div class="game">God of War</div>
+<div class="game">Elden Ring</div>
+<div class="game">Sekiro</div>
+<div class="game">Lies of P</div>
+<div class="game">The Last of Us</div>
+
+</div>
+
+<div id="status">
+↑ ↓ للتنقل — X للاختيار
+</div>
+
+</div>
+
+<script>
+
+const games = document.querySelectorAll(".game");
+
+let selected = 0;
+
+function updateSelection() {
+
+    games.forEach((game, index) => {
+
+        game.classList.toggle(
+            "selected",
+            index === selected
+        );
+
+    });
+
+}
+
+function chooseGame() {
+
+    const name = games[selected].textContent;
+
+    document.getElementById("status").textContent =
+        "تم اختيار: " + name;
+
+}
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "ArrowDown") {
+
+        selected++;
+
+        if (selected >= games.length) {
+            selected = 0;
+        }
+
+        updateSelection();
+
+    }
+
+    if (event.key === "ArrowUp") {
+
+        selected--;
+
+        if (selected < 0) {
+            selected = games.length - 1;
+        }
+
+        updateSelection();
+
+    }
+
+    if (
+        event.key === "Enter" ||
+        event.key === "x" ||
+        event.key === "X"
+    ) {
+
+        chooseGame();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
