@@ -1,17 +1,37 @@
-name: Build PS4 Library
+name: Build PS4 PKG
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Download project
+      - name: Checkout my project
         uses: actions/checkout@v4
 
-      - name: Show project files
+      - name: Checkout OpenOrbis
+        uses: actions/checkout@v4
+        with:
+          repository: OpenOrbis/OpenOrbis-PS4-Toolchain
+          path: openorbis
+
+      - name: Download OpenOrbis Toolchain
         run: |
-          echo "Pisscou PS4 Library"
-          ls -la
+          curl -L https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/v0.5.4/toolchain-llvm-18.tar.gz -o toolchain.tar.gz
+          tar -xzf toolchain.tar.gz
+
+      - name: Set Toolchain
+        run: |
+          echo "OO_PS4_TOOLCHAIN=$GITHUB_WORKSPACE/OpenOrbis/PS4Toolchain" >> $GITHUB_ENV
+
+      - name: Build Hello World
+        working-directory: openorbis/samples/hello_world
+        run: make
+
+      - name: Upload PS4 PKG
+        uses: actions/upload-artifact@v4
+        with:
+          name: pisscou-ps4-pkg
+          path: openorbis/samples/hello_world/*.pkg
