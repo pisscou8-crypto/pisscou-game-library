@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pisscou Game Library</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0f;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #15151d, #24243a);
+      padding: 25px 15px;
+      text-align: center;
+      border-bottom: 2px solid #333;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 15px;
+    }
+
+    .search-box {
+      margin-bottom: 20px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #444;
+      background: #17171e;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    #search:focus {
+      border-color: #777;
+    }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      margin-bottom: 10px;
+    }
+
+    .category {
+      white-space: nowrap;
+      padding: 9px 15px;
+      border-radius: 20px;
+      border: 1px solid #444;
+      background: #17171e;
+      color: white;
+      cursor: pointer;
+    }
+
+    .category.active,
+    .category:hover {
+      background: #33334a;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 18px;
+    }
+
+    .game {
+      background: #15151b;
+      border: 1px solid #292932;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .game:hover {
+      transform: translateY(-4px);
+      border-color: #666;
+    }
+
+    .game img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+
+    .game-info {
+      padding: 12px;
+    }
+
+    .game-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .game-category {
+      color: #999;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .game-button {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #272738;
+      color: white;
+      padding: 10px;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    .game-button:hover {
+      background: #3a3a52;
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      color: #888;
+      padding: 40px 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      padding: 30px 15px;
+      margin-top: 30px;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .games {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .game img {
+        height: 210px;
+      }
+
+      .game-title {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎮 Pisscou Game Library</h1>
+    <p>مكتبة ألعاب PlayStation 4</p>
+  </header>
+
+  <main class="container">
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="search"
+        placeholder="🔎 ابحث عن لعبة..."
+      >
+    </div>
+
+    <div class="categories">
+      <button class="category active" data-category="all">الكل</button>
+      <button class="category" data-category="action">أكشن</button>
+      <button class="category" data-category="adventure">مغامرات</button>
+      <button class="category" data-category="rpg">RPG</button>
+      <button class="category" data-category="horror">رعب</button>
+      <button class="category" data-category="sport">رياضة</button>
+    </div>
+
+    <section class="games" id="games">
+
+      <!-- God of War -->
+      <article class="game" data-category="action" data-name="God of War">
+        <img
+          src="https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?auto=format&fit=crop&w=600&q=80"
+          alt="God of War"
+        >
+
+        <div class="game-info">
+          <div class="game-title">God of War</div>
+          <div class="game-category">أكشن • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+
+      <!-- GTA V -->
+      <article class="game" data-category="action" data-name="GTA V">
+        <img
+          src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80"
+          alt="GTA V"
+        >
+
+        <div class="game-info">
+          <div class="game-title">GTA V</div>
+          <div class="game-category">أكشن • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+
+      <!-- The Last of Us -->
+      <article class="game" data-category="adventure" data-name="The Last of Us">
+        <img
+          src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80"
+          alt="The Last of Us"
+        >
+
+        <div class="game-info">
+          <div class="game-title">The Last of Us</div>
+          <div class="game-category">مغامرات • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+
+      <!-- Elden Ring -->
+      <article class="game" data-category="rpg" data-name="Elden Ring">
+        <img
+          src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"
+          alt="Elden Ring"
+        >
+
+        <div class="game-info">
+          <div class="game-title">Elden Ring</div>
+          <div class="game-category">RPG • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+
+      <!-- Resident Evil -->
+      <article class="game" data-category="horror" data-name="Resident Evil">
+        <img
+          src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80"
+          alt="Resident Evil"
+        >
+
+        <div class="game-info">
+          <div class="game-title">Resident Evil</div>
+          <div class="game-category">رعب • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+
+      <!-- It Takes Two -->
+      <article class="game" data-category="adventure" data-name="It Takes Two">
+        <img
+          src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=600&q=80"
+          alt="It Takes Two"
+        >
+
+        <div class="game-info">
+          <div class="game-title">It Takes Two</div>
+          <div class="game-category">مغامرات • PS4</div>
+
+          <a
+            class="game-button"
+            href="#"
+            target="_blank"
+          >
+            عرض اللعبة
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="empty" id="empty">
+      لا توجد لعبة بهذا الاسم 🔎
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Pisscou Game Library
+  </footer>
+
+
+  <script>
+    const search = document.getElementById("search");
+    const games = document.querySelectorAll(".game");
+    const categories = document.querySelectorAll(".category");
+    const empty = document.getElementById("empty");
+
+    let selectedCategory = "all";
+
+    function filterGames() {
+      const searchText = search.value.toLowerCase().trim();
+      let visible = 0;
+
+      games.forEach(game => {
+        const name = game.dataset.name.toLowerCase();
+        const category = game.dataset.category;
+
+        const matchesSearch = name.includes(searchText);
+        const matchesCategory =
+          selectedCategory === "all" ||
+          category === selectedCategory;
+
+        if (matchesSearch && matchesCategory) {
+          game.style.display = "block";
+          visible++;
+        } else {
+          game.style.display = "none";
+        }
+      });
+
+      empty.style.display = visible === 0 ? "block" : "none";
+    }
+
+    search.addEventListener("input", filterGames);
+
+    categories.forEach(button => {
+      button.addEventListener("click", () => {
+
+        categories.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        selectedCategory = button.dataset.category;
+
+        filterGames();
+      });
+    });
+  </script>
+
+</body>
+</html>
